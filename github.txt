@@ -1,0 +1,53 @@
+Configuration Name and email in gituhub
+    git config --global user.name "Your Username"
+    git config --global user.email "Your email"
+
+GIT Initialise
+    git init
+
+Check file status
+    git status
+    git status -s
+
+To stage file
+    git add index.html
+    git add -A
+
+To commit all the changes
+    git commit -m "any message you want"
+
+To bring old code back 
+    git checkout -f
+    git checkout "file name"
+
+To see the changes made
+    git diff
+    git diff --staged (in the case if we have already added the file using command "git add -A". Then it will compare with the last commit we made.)
+
+To add and commit together
+    git commit -a -m "any message"
+
+To see all the files
+    ls
+
+To delete file 
+    git rm "file name"
+
+To create file
+    touch "file name"
+
+To create branch ( "master" is our default branch )
+    git branch "new branch name"
+
+To change branch 
+    git checkout "new branch name"
+
+To add the repository on ourt local(git) in which we want to put our files
+    git remote add origin https://github.com/aaryanjainn/testing.git
+
+To check remote connection (or connected repositories)
+    git remote
+    git remote -v
+
+To push code on github
+    git push origin master (here "origin" is the name of the remote connection and the word "master" shows wich branch we want to push on github )
