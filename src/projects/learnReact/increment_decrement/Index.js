@@ -14,12 +14,15 @@ function Index() {
 			changeVal(storeVal + 1);
 		}
 	}
-	function decrement() {
-		if (storeVal <= 0) {
+	function decrement()
+	{
+		if (storeVal <= 0)
+		{
 			msgFunction("Can't add number lesser than 0");
 			changeVal(0);
 		}
-		else {
+		else
+		{
 			changeVal(storeVal - 1);
 		}
 	}
@@ -29,7 +32,6 @@ function Index() {
 			<button onClick={increment}>+</button>
 			<p> {storeVal} </p>
 			<button onClick={decrement}>-</button>
-
 			<p> {msgVal} </p>
 		</>
 	)

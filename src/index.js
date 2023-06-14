@@ -23,8 +23,7 @@ import Index from './projects/ecommerce/Index';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  
-    <Index />
-  
+root.render
+(
+    <Index/>  
 );

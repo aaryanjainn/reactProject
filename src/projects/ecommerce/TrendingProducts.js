@@ -1,33 +1,49 @@
 import React, { useContext } from 'react'
 import './Style.css';
-import { useState } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { eCommerceContext } from './Index';
 
-
-
-
-
-
 function TrendingProducts()
 {
+	// Using CONTEXT (exporting variable and functions from index.js)
+	const { cart, setCart, trendingProducts, cartBtn, cartBtnChange, storeVal, changeVal, msgVal, msgFunction} = useContext(eCommerceContext);
+
 	// JS CODE_____________________
-		const {cart,setCart,trendingProducts} = useContext(eCommerceContext);	
-	
-		function addToCart(e,productId)
-		{
-			var result = cart.find(item => item.id === productId);
+	function addToCart(e, productId)
+	{
+		// console.log(productId);
+		if (!cart.includes(productId)) {
+			cart.find(item => item.id === productId);
 			setCart(cart => [...cart, productId]);
 		}
+		cartBtnChange([...cartBtn, productId])
+		localStorage.setItem("products", cart);
+	}
 
+	function increment()
+	{
+		if (storeVal >= 10)
+		{
+			msgFunction("Can't add number greate than 10");
+		}
+		else
+		{
+			changeVal(storeVal + 1);
+		}
+	}
 
-		var convert = JSON.stringify(cart)
-		localStorage.setItem("products", convert);
-	
+	function decrement()
+	{
+		if (storeVal <= 0) {
+			msgFunction("Can't add number lesser than 0");
+		}
+		else {
+			changeVal(storeVal - 1);
+		}
+	}
+
 	// View________________________
-	return (
-
+	return(
 		<>
 			<div className='container text-center'>
 				<h2>
@@ -37,13 +53,21 @@ function TrendingProducts()
 				<div className='container-fluid pt-4'>
 					<div className='row'>
 						{
-							trendingProducts.map((value, keyP) =>
-							{
-								return(
+							trendingProducts.map((value, keyP) => {
+								return (
 									<>
-										<div className='col-6 p-4'>
-											<div className='image' style={{backgroundImage:"url("+value+")"}}>
-												<button className='addToCartBtn' onClick={(e) => addToCart(e,keyP)}> <ShoppingCartCheckoutIcon/> </button>
+										<div className='col-6 p-4' key={keyP}>
+											<div className='image' style={{ backgroundImage: "url(" + value + ")" }}>
+
+												{/* Add to Cart Button */}
+												<button className={cartBtn.includes(keyP) ? "dNone" : "addToCartBtn"} onClick={(e) => addToCart(e, keyP)}> <ShoppingCartCheckoutIcon /> </button>
+
+												{/* Increase quantity buttons */}
+												<div className={cartBtn.includes(keyP) ? "increaseQuantityBox" : "dNone"}>
+													<button onClick={decrement}>-</button>
+													<p> {storeVal} </p>
+													<button onClick={increment}>+</button>
+												</div>
 											</div>
 										</div>
 									</>
@@ -54,7 +78,6 @@ function TrendingProducts()
 				</div>
 			</div>
 		</>
-		
 	)
 }
 

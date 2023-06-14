@@ -15,6 +15,10 @@ export const eCommerceContext = createContext();
 
 function Index() {
     const [cart,setCart] = useState([]);
+    const [cartBtn, cartBtnChange] = useState([]);
+    const [storeVal, changeVal] = useState(0);
+	const [msgVal, msgFunction] = useState("");
+
     var trendingProducts =
 	[
 		'https://i0.wp.com/since7.com/wp-content/uploads/2023/03/arsenallll-FILEminimizer.jpg?resize=500%2C640&ssl=1',
@@ -25,7 +29,7 @@ function Index() {
     
     return (
         <>
-            <eCommerceContext.Provider value={{cart,setCart,trendingProducts}}>
+            <eCommerceContext.Provider value={{cart,setCart,cartBtn,cartBtnChange,trendingProducts,storeVal,changeVal,msgVal,msgFunction}}>
                 <BrowserRouter>
                     <Header/>
                     <Routes>

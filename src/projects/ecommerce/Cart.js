@@ -6,12 +6,8 @@ import { eCommerceContext } from './Index';
 function Cart() {
 
 	const {trendingProducts} = useContext(eCommerceContext);	
-	var store = localStorage.getItem("products");
-	console.log("jlhgklgfhk;jhgfh");
-	
+	var store = localStorage.getItem("products");	
 	var storeConvert = JSON.parse(store);	
-	console.log(storeConvert); 
-
 	return (
 		<>
 			<div className='container-fluid pt-4'>
@@ -21,15 +17,10 @@ function Cart() {
 						{
 							return (
 								<>
-
 									<div className='col-6 p-4'>
-										<div className='image' style={{backgroundImage:"url("+trendingProducts[value]+")"}}>
-											<button className='addToCartBtn' >  </button>
-										</div>
+										<div className='image' style={{backgroundImage:"url("+trendingProducts[value]+")"}}></div>
 									</div>
-									
 									<hr></hr>
-									
 								</>
 							)
 						})
