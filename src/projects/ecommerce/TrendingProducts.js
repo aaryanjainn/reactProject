@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './Style.css';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import { eCommerceContext } from './Index';
@@ -7,30 +7,43 @@ function TrendingProducts()
 {
 	// Using CONTEXT (exporting variable and functions from index.js)
 	const { cart, setCart, trendingProducts, cartBtn, cartBtnChange, storeVal, changeVal, msgVal, msgFunction} = useContext(eCommerceContext);
-
+	const[showQuantity,setQuantity] = useState("");
 	// JS CODE_____________________
 	function addToCart(e, productId)
 	{
-		// console.log(productId);
-		if (!cart.includes(productId)) {
-			cart.find(item => item.id === productId);
-			setCart(cart => [...cart, productId]);
+
+		if (!cart.includes(productId))
+		{
+			var productArr = {
+						productId : productId,
+						quantity: 0
+					}
+			setCart(cart => [...cart, productArr]);
 		}
+
+		
 		cartBtnChange([...cartBtn, productId])
-		localStorage.setItem("products", cart);
+		
 	}
 
-	function increment()
+	var convert = JSON.stringify(cart)
+	localStorage.setItem("products", convert);
+
+
+	function increment(element, productVal ,pCount)
 	{
-		if (storeVal >= 10)
-		{
-			msgFunction("Can't add number greate than 10");
-		}
-		else
-		{
-			changeVal(storeVal + 1);
-		}
+		cart.map((number)=>
+		{   
+			if(number.productId == productVal)
+			{	
+				let add = number.quantity +1;
+				number.quantity = add;
+			}
+		});   
+		var store = cart.filter((abc) => {return abc.productId === productVal})
+		setQuantity(store[0].quantity);
 	}
+	
 
 	function decrement()
 	{
@@ -65,8 +78,8 @@ function TrendingProducts()
 												{/* Increase quantity buttons */}
 												<div className={cartBtn.includes(keyP) ? "increaseQuantityBox" : "dNone"}>
 													<button onClick={decrement}>-</button>
-													<p> {storeVal} </p>
-													<button onClick={increment}>+</button>
+													<p> { showQuantity} </p>
+													<button onClick={(e) => increment(e,keyP,0)}>+</button>
 												</div>
 											</div>
 										</div>

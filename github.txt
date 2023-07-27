@@ -50,4 +50,4 @@ To check remote connection (or connected repositories)
     git remote -v
 
 To push code on github
-    git push origin master (here "origin" is the name of the remote connection and the word "master" shows wich branch we want to push on github )
+    git push -u origin master (here "origin" is the name of the remote connection and the word "master" shows wich branch we want to push on github )
